@@ -15,7 +15,7 @@ class Channel:
         self.title = self.channel['items'][0]['snippet']['title']
         self.description = self.channel["items"][0]["snippet"]["description"]
         self.url = "https://www.youtube.com/channel/" + channel_id
-        self.subscriberCount = int(self.channel["items"][0]["statistics"]["subscriberCount"])
+        self.subscriber_count = int(self.channel["items"][0]["statistics"]["subscriberCount"])
         self.video_count = int(self.channel["items"][0]["statistics"]["videoCount"])
         self.viewCount = int(self.channel["items"][0]["statistics"]["viewCount"])
 
@@ -23,25 +23,28 @@ class Channel:
         return f'{self.title}({self.url})'
 
     def __add__(self, other):
-        return self.subscriberCount + other.subscriberCount
+        if type(other) == Channel:
+            return self.subscriber_count + other.subscriber_count
+        else:
+            raise TypeError
 
     def __sub__(self, other):
-        return self.subscriberCount - other.subscriberCount
+        return self.subscriber_count - other.subscriber_count
 
     def __gt__(self, other):
-        return self.subscriberCount > other.subscriberCount
+        return self.subscriber_count > other.subscriber_count
 
     def __ge__(self, other):
-        return self.subscriberCount >= other.subscriberCount
+        return self.subscriber_count >= other.subscriber_count
 
     def __lt__(self, other):
-        return self.subscriberCount < other.subscriberCount
+        return self.subscriber_count < other.subscriber_count
 
     def __le__(self, other):
-        return self.subscriberCount >= other.subscriberCount
+        return self.subscriber_count >= other.subscriber_count
 
     def __eq__(self, other):
-        return self.subscriberCount == other.subscriberCount
+        return self.subscriber_count == other.subscriber_count
 
     def print_info(self):
         """Выводит в консоль информацию о канале."""
@@ -57,7 +60,7 @@ class Channel:
             'title': self.title,
             'description': self.description,
             'url': self.url,
-            'subscriberCount': self.subscriberCount,
+            'subscriberCount': self.subscriber_count,
             'video_count': self.video_count,
             'viewCount': self.viewCount
         }
