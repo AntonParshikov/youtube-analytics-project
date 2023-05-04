@@ -14,6 +14,9 @@ class Video(Channel):
         self.view_count = self.video['items'][0]['statistics']['viewCount']
         self.like_count = self.video['items'][0]['statistics']['likeCount']
 
+    def __str__(self):
+        return f'{self.title}'
+
 
 class PLVideo(Video):
 
